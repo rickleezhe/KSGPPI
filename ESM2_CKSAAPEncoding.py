@@ -104,23 +104,14 @@ class CKSAAP(nn.Module):
         code_final = torch.FloatTensor(code_final)
         code_final = code_final.view(k+1, 20, 20)
         return code_final
-
+        
     def return_CKSAAP_Emb_code(self, query_seq, emb, k=3, is_shape_for_3d=False):
-        """
-        :param is_shape_for_3d:
-        :param query_seq: L
-        :param emb: [L, D] tensor
-        :param k:
-        :return:
-        """
-        code_final = []
+        code_final = torch.zeros((k + 1, 20, 20, emb.size(-1))) 
         for turns in range(k + 1):
             DP_dic = {}
-            code = []
-            code_order = []
-            for i in self.DP_list: ##['AA', 'AC', ..., 'YW', 'YY']
+            for i in self.DP_list:
                 DP_dic[i] = torch.zeros(emb.size(-1))
-            # print(DP_dic) #{'AA': tensor([0., 0., 0.,  ..., 0., 0., 0.]),..., 'YY': tensor([0., 0., 0.,  ..., 0., 0., 0.])}  #1280
+
             for i in range(len(query_seq) - turns - 1):
                 tmp_dp_1 = query_seq[i]
                 tmp_dp_2 = query_seq[i + turns + 1]
@@ -133,14 +124,9 @@ class CKSAAP(nn.Module):
                     DP_dic[tmp_dp] += tmp_emb
                 else:
                     DP_dic[tmp_dp] = tmp_emb
-            for i, j in DP_dic.items():
-                code.append(j / (len(query_seq) - turns - 1))
-            for i in self.DP_list:
-                code_order.append(code[self.DP_list.index(i)])
-            code_final += code
 
-        code_final = torch.stack(code_final)
-        code_final = code_final.view(k+1, 20, 20, -1)
+            for idx, i in enumerate(self.DP_list):
+                code_final[turns, idx // 20, idx % 20, :] = DP_dic[i] / (len(query_seq) - turns - 1)
 
         if is_shape_for_3d:
             k_plus_one, aa_num_1, aa_num_2, position_posi_emb_size = code_final.size()
@@ -200,6 +186,26 @@ def loadFasta(fasta):
 #         name2 = row2
 #         seq2 = str(pro2[row2])
 #     esm_ = ESMFineTune(esm2_layer=0)  # .to(device)
+#
+#     esm_out1 = esm_([(name1,seq1)])
+#     esm_out2 = esm_([(name2,seq2)])
+#
+#
+#     CKSAAP_ = CKSAAP()
+#     EKS_coding1 = CKSAAP_.return_CKSAAP_Emb_code(seq1, torch.tensor(esm_out1), is_shape_for_3d=True)
+#     EKS_coding2 = CKSAAP_.return_CKSAAP_Emb_code(seq2, torch.tensor(esm_out2), is_shape_for_3d=True)
+#
+# #    np.save('Data/Yeast/PIPR-cut/Ks-coding/'+name+'.npy', textembed_1)
+#     print(EKS_coding1.shape)
+#     print(EKS_coding2.shape)
+#     print(EKS_coding1)
+#     print(EKS_coding2)
+
+
+
+
+
+ .to(device)
 #
 #     esm_out1 = esm_([(name1,seq1)])
 #     esm_out2 = esm_([(name2,seq2)])
