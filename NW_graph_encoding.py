@@ -12,7 +12,7 @@ args = parser.parse_args()
 
 
 
-with open('./graph-encoding/'+str(args.species)+'/multi.protein.fa.tsv','r') as ff:
+with open('./graph-encoding/'+str(args.species)+'/'+str(args.species)+'.protein.fa.tsv','r') as ff:
     fasta_lines = ff.readlines()
 fasta = {}
 for j in fasta_lines:
