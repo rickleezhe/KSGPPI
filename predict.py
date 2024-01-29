@@ -46,23 +46,23 @@ if __name__ == '__main__':
     # max_letter1 = '362663.ECP_0619'
     # max_letter2 = '362663.ECP_1666'
 
-   pro1_string_score ={}
-   for one in fasta:
-       score1 = NWalign(seq1, fasta[one])
-       # print(name1,one,score1)
-       pro1_string_score[one] = score1
-       if score1 == 1.000:
-           break
-   pro2_string_score ={}
-   for one in fasta:
-       score2 = NWalign(seq2, fasta[one])
-       # print(name2,one,score2)
-       pro2_string_score[one] = score2
-       if score2 == 1.000:
-           break
+    pro1_string_score ={}
+    for one in fasta:
+        score1 = NWalign(seq1, fasta[one])
+        # print(name1,one,score1)
+        pro1_string_score[one] = score1
+        if score1 == 1.000:
+            break
+    pro2_string_score ={}
+    for one in fasta:
+        score2 = NWalign(seq2, fasta[one])
+        # print(name2,one,score2)
+        pro2_string_score[one] = score2
+        if score2 == 1.000:
+            break
 
-   max_letter1 = max(pro1_string_score, key=pro1_string_score.get)
-   max_letter2 = max(pro2_string_score, key=pro2_string_score.get)
+    max_letter1 = max(pro1_string_score, key=pro1_string_score.get)
+    max_letter2 = max(pro2_string_score, key=pro2_string_score.get)
 
 #    graph_emb = np.load('./graph-encoding/graph.emb.npz')
     graph_emb = np.load('./graph-encoding/'+str(args.species)+'/graph.emb.npz')
