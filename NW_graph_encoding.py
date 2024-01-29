@@ -1,9 +1,18 @@
 import sys
 import os
 import numpy as np
-from predict import *
+import argparse
 
-with open('./graph-encoding'+str(args.species)+'/multi.protein.fa.tsv','r') as ff:
+parser = argparse.ArgumentParser()
+parser.add_argument("-species", "--species", default='multispecies')
+parser.add_argument("-seq_file1", "--seq_file1")
+parser.add_argument("-seq_file2", "--seq_file2")
+parser.add_argument("-dv", "--device", default='cuda')
+args = parser.parse_args()
+
+
+
+with open('./graph-encoding/'+str(args.species)+'/multi.protein.fa.tsv','r') as ff:
     fasta_lines = ff.readlines()
 fasta = {}
 for j in fasta_lines:

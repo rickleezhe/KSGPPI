@@ -27,7 +27,7 @@ class Convs(nn.Module):
 
 
 class KSGPPI(torch.nn.Module):
-    def __init__(self, args):
+    def __init__(self):
         super(KSGPPI, self).__init__()
         self.embedding_size = 5120
         self.drop = 0.2

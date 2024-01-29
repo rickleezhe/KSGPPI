@@ -14,15 +14,15 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-species", "--species", default='multispecies')
-    parser.add_argument("-seq_file1", "--seq_fa1")
-    parser.add_argument("-seq_file2", "--seq_fa2")
-    parser.add_argument("-dv", "--device", default='cuda:0')
+    parser.add_argument("-seq_file1", "--seq_file1")
+    parser.add_argument("-seq_file2", "--seq_file2")
+    parser.add_argument("-dv", "--device", default='cuda')
     args = parser.parse_args()
 
     # if len(sys.argv) > 1:
     #     seq_file1 = sys.argv[1]
     #     seq_file2 = sys.argv[2]
-    device = args.dv
+    device = args.device
     pro1 = loadFasta(args.seq_file1)
     pro2 = loadFasta(args.seq_file2)
     name1, seq1 = next(iter(pro1.items()))
@@ -41,7 +41,7 @@ if __name__ == '__main__':
     # print(EKS_coding1)
     # print(EKS_coding2)
 
-    print(type(EKS_coding2))
+#    print(type(EKS_coding2))
 
     max_letter1 = '362663.ECP_0619'
     max_letter2 = '362663.ECP_1666'
@@ -76,10 +76,10 @@ if __name__ == '__main__':
     G2 = G2_.unsqueeze(0).to(device)
 
 
-    model = KSGPPI(modelArgs).to(device)
-    model.load_state_dict(torch.load('model'+str(args.species)+'/model.pkl'))
+    model = KSGPPI().to(device)
+    model.load_state_dict(torch.load('model/'+str(args.species)+'/model.pkl'))
 
-    prediction = predict_single_data(attention_model, G1, G2, dmap1, dmap2)
+    prediction = predict_single_data(model, G1, G2, dmap1, dmap2)
     print(f'seq1: {name1},seq2: {name2}, Prediction: {prediction}')
 
     with open('predict.txt', 'a') as file:
