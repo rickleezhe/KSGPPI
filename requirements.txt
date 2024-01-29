@@ -1,0 +1,31 @@
+certifi==2023.7.22
+charset-normalizer==3.2.0
+contourpy==1.1.1
+fair-esm==2.0.0
+fonttools==4.42.1
+gensim==4.3.2
+idna==3.4
+importlib-resources==6.0.1
+joblib==1.3.2
+mkl-fft==1.3.1
+mkl-random==1.2.2
+mkl-service==2.4.0
+networkx==3.1
+numpy @ file:///croot/numpy_and_numpy_base_1682520569166/work
+olefile @ file:///home/conda/feedstock_root/build_artifacts/olefile_1701735466804/work
+packaging==23.1
+Pillow==7.1.2
+requests==2.31.0
+scikit-learn==1.3.0
+scipy==1.10.1
+six @ file:///home/conda/feedstock_root/build_artifacts/six_1620240208055/work
+sklearn==0.0
+smart-open==6.4.0
+some-package==0.1
+threadpoolctl==3.2.0
+torch==1.8.0
+torchaudio==0.8.0a0+a751e1d
+torchvision==0.11.3
+typing_extensions @ file:///home/conda/feedstock_root/build_artifacts/typing_extensions_1702176139754/work
+urllib3==2.0.4
+zipp==3.17.0
