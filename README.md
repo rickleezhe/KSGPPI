@@ -29,6 +29,14 @@ Improving Protein-Protein Interaction Prediction using Protein Language Model an
   $ python predict.py -seq_file1 example/P21346.fa -seq_file2 example/P00955.fa
 ~~~
 
+## Result
+
+* The prediction result file for the input fasta file (-seq_file1) and fasta file (-seq_file2) can be found in the predict.txt file.
+* The prediction result file is one line.  The first protein name, the second protein name, and the predicted probability of their interaction.  For example:
+~~~
+seq1: P26266, seq2: P00955, Prediction: 0.9984733462333679
+~~~
+
 ## Tips
 This package is only free for academic use.
 
